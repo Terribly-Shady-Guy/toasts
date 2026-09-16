@@ -37,6 +37,13 @@ notifyForm.addEventListener("submit", async (event) => {
     await pushNotification(notification);
 });
 
+toaster.addEventListener("animationend", event => {
+    const eventTarget = event.currentTarget;
+    if (event.animationName === "slideOut" && eventTarget.classList.contains("toast")) {
+        eventTarget.remove();
+    }
+});
+
 let isProcessing = false;
 
 async function pushNotification(notification) {
@@ -84,12 +91,6 @@ async function processNotifications() {
 
         const toastFragment = toastTemplate.content.cloneNode(true);
         const toast = toastFragment.querySelector(".toast");
-        
-        toast.addEventListener("animationend", event => {
-            if (event.animationName === "slideOut") {
-                event.currentTarget.remove();
-            }
-        })
 
         toast.classList.add(result.class); 
 
