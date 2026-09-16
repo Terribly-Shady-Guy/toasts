@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="toast.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="toast-style.css">
+    <title>Toast Notifications</title>
+</head>
+<body>
+    <header>
+        <h1>Some web application</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Enter some content for a toast notification</h2>
+            <form id="notify-form">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" maxlength="10" required>
+                <label for="toast-content">Content</label>
+                <input type="text" name="content" id="toast-content" maxlength="35" required>
+                <fieldset>
+                    <legend>Select a toast type.</legend>
+                    <input type="radio" name="toastType" id="info-radio" value="info" checked>
+                    <label for="info-radio">Info</label>
+                    <input type="radio" name="toastType" id="success-radio" value="success">
+                    <label for="success-radio">Success</label>
+                    <input type="radio" name="toastType" id="warning-radio" value="warning">
+                    <label for="warning-radio">Warning</label>
+                    <input type="radio" name="toastType" id="error-radio" value="error">
+                    <label for="error-radio">Error</label>
+                </fieldset>
+                <button type="submit">Notify</button>
+            </form>
+        </section>
+        <div class="toaster"></div>
+    </main>
+    <template id="toast-template">
+        <div class="toast toast-slide-in" role="status">
+                <div class="toast-image toast-column"></div>
+                <div class="toast-text toast-column">
+                    <h3 class="toast-text-title"></h3>
+                    <p class="toast-text-content"></p>
+                </div>
+                <div class="toast-dismiss-container toast-column">
+                    <button type="button" class="dismiss-button">X</button>
+                </div>
+            </div>
+    </template>
+</body>
+</html>

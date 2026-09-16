@@ -1,0 +1,113 @@
+:root {
+    --toast-accent-color: black;
+}
+
+.toaster {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 355px;
+    height: 70px;
+}
+
+.toast {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-left: 8px var(--toast-accent-color) solid;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.205);
+    box-sizing: border-box;
+}
+
+.toast-info {
+    --toast-accent-color: royalblue;
+}
+
+.toast-success {
+    --toast-accent-color: lightgreen;
+}
+
+.toast-warning {
+    --toast-accent-color: orange;
+}
+
+.toast-error {
+    --toast-accent-color: red;
+}
+
+.toast-image {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--toast-accent-color);
+
+    & svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.dismiss-button {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: gray;
+    transition: color .125s ease;
+
+    &:hover {
+        color: lightgray;
+    }
+}
+
+.toast-dismiss-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+.toast-column {
+    height: 100%;
+}
+
+.toast-text {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    & p, & h3 {
+        margin: 0;
+    }
+}
+
+.toast-slide-in {
+    animation: .333s forwards 0s slideIn;
+}
+
+.toast-slide-out {
+    animation: .333s forwards 0s slideOut;
+}
+
+@keyframes slideIn {
+    from {
+        translate: 0 101vh;
+    }
+
+    to {
+        translate: 0 0;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        translate: 0;
+    }
+
+    to {
+        translate: 101vw;
+    }
+}
