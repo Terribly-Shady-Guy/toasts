@@ -85,11 +85,11 @@
 }
 
 .toast-slide-in {
-    animation: .333s forwards 0s slideIn;
+    animation: .333s forwards slideIn;
 }
 
 .toast-slide-out {
-    animation: .333s forwards 0s slideOut;
+    animation: .333s forwards slideOut;
 }
 
 @keyframes slideIn {
