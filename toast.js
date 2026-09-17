@@ -62,6 +62,28 @@ toaster.addEventListener("animationend", event => {
     }
 });
 
+toaster.addEventListener("click", event => {
+    const eventTargetElement = event.target;
+    if (!eventTargetElement.classList.contains("dismiss-button")) {
+        return;
+    }
+
+    const toast = eventTargetElement.closest(".toast");
+    if (toast === null) {
+        return;
+    }
+
+    const toastSlideInAnimation = toast.getAnimations()
+        .find(animation => animation.animationName === "slideOut");
+    
+    if (toastSlideInAnimation === undefined) {
+        return;
+    }
+
+    toastSlideInAnimation.effect.updateTiming({delay: 0});
+    toastSlideInAnimation.play();
+});
+
 let isProcessing = false;
 
 async function pushNotification(notification) {
@@ -112,19 +134,6 @@ async function processNotifications() {
         content.innerText = notification.content;
 
         toaster.appendChild(toastFragment);
-
-        const displayTimeout = () => new Promise((resolve) => {
-            const id = setTimeout(resolve, 5 * 1000);
-
-            const dismissButton = toast.querySelector(".dismiss-button");
-            dismissButton.addEventListener("click", () => {
-                clearTimeout(id);
-                resolve();
-            }, {once: true});
-        });
-
-        await displayTimeout();
-        toast.classList.add("toast-slide-out");
     }
 
     isProcessing = false;
