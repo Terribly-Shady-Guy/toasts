@@ -86,21 +86,23 @@ async function processNotifications() {
         const toastFragment = toastTemplate.content.cloneNode(true);
         const toast = toastFragment.querySelector(".toast");
 
-        toast.classList.add(toastStyle.class); 
+        if (toastStyle !== undefined) {
+            toast.classList.add(toastStyle.class);
 
-        const image = toastFragment.querySelector(".toast-image");
+            const image = toastFragment.querySelector(".toast-image");
 
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 25 25");
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 0 25 25");
 
-        const svgUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
+            const svgUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
 
-        svgUse.setAttribute("href", `./${toastStyle.badge}`);
-        svgUse.setAttribute("width", 25);
-        svgUse.setAttribute("height", 25);
+            svgUse.setAttribute("href", `./${toastStyle.badge}`);
+            svgUse.setAttribute("width", 25);
+            svgUse.setAttribute("height", 25);
 
-        svg.appendChild(svgUse);
-        image.appendChild(svg);
+            svg.appendChild(svgUse);
+            image.appendChild(svg);
+        } 
 
         const title = toastFragment.querySelector(".toast-text-title");
         title.innerText = notification.title;
