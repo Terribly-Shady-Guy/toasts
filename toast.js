@@ -68,7 +68,7 @@ toaster.addEventListener("click", event => {
         return;
     }
 
-    const toast = eventTargetElement.closest(".toast");
+    const toast = eventTargetElement.closest(".toaster > .toast");
     if (toast === null) {
         return;
     }
