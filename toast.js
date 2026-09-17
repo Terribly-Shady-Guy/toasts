@@ -14,8 +14,26 @@ class NotificationQueue {
     }
 }
 
+const toastNotificationStyles = new Map();
+toastNotificationStyles.set("info", {
+        class: "toast-info",
+        badge: "info-circle-fill.svg"
+    })
+    .set("success", {
+        class: "toast-success",
+        badge: "check-circle-fill.svg"
+    })
+    .set("warning", {
+        class: "toast-warning",
+        badge: "exclamation-triangle-fill.svg"
+    })
+    .set("error", {
+        class: "toast-error",
+        badge: "exclamation-circle-fill.svg"
+    });
+
 const notifyForm = document.querySelector("#notify-form");
-const toastTemplate = document.querySelector("template");
+const toastTemplate = document.querySelector("#toast-template");
 const toaster = document.querySelector(".toaster");
 
 const notifications = new NotificationQueue();
@@ -38,9 +56,8 @@ notifyForm.addEventListener("submit", async (event) => {
 });
 
 toaster.addEventListener("animationend", event => {
-    const eventTarget = event.currentTarget;
-    if (event.animationName === "slideOut" && eventTarget.classList.contains("toast")) {
-        eventTarget.remove();
+    if (event.animationName === "slideOut") {
+        event.target.remove();
     }
 });
 
@@ -64,42 +81,21 @@ async function processNotifications() {
             break;
         }
         
-        const result = ((type) => {
-            switch (type) {
-                case "info":
-                    return {
-                        class: "toast-info",
-                        badge: "info-circle-fill.svg"
-                    };
-                case "success":
-                    return {
-                        class: "toast-success",
-                        badge: "check-circle-fill.svg"
-                    };
-                case "warning":
-                    return {
-                        class: "toast-warning",
-                        badge: "exclamation-triangle-fill.svg"
-                    };
-                default: 
-                    return {
-                        class: "toast-error",
-                        badge: "exclamation-circle-fill.svg"
-                    };
-            }
-        })(notification.type);
+        const toastStyle = toastNotificationStyles.get(notification.type);
 
         const toastFragment = toastTemplate.content.cloneNode(true);
         const toast = toastFragment.querySelector(".toast");
 
-        toast.classList.add(result.class); 
+        toast.classList.add(toastStyle.class); 
 
         const image = toastFragment.querySelector(".toast-image");
 
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 25 25");
+
         const svgUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
 
-        svgUse.setAttribute("href", result.badge);
+        svgUse.setAttribute("href", `./${toastStyle.badge}`);
         svgUse.setAttribute("width", 25);
         svgUse.setAttribute("height", 25);
 
