@@ -16,8 +16,8 @@ class NotificationQueue {
 
 const notifications = new NotificationQueue();
 
-const toastNotificationStyles = new Map();
-toastNotificationStyles.set("info", {
+const toastNotificationStyles = new Map()
+    .set("info", {
         class: "toast-info",
         badge: "info-circle-fill.svg"
     })
