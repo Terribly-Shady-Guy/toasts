@@ -14,6 +14,8 @@ class NotificationQueue {
     }
 }
 
+const notifications = new NotificationQueue();
+
 const toastNotificationStyles = new Map();
 toastNotificationStyles.set("info", {
         class: "toast-info",
@@ -36,7 +38,6 @@ const notifyForm = document.querySelector("#notify-form");
 const toastTemplate = document.querySelector("#toast-template");
 const toaster = document.querySelector(".toaster");
 
-const notifications = new NotificationQueue();
 notifyForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
