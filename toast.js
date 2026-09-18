@@ -109,6 +109,8 @@ async function processNotifications() {
     isProcessing = true;
 
     while (!notifications.isEmpty) {
+        await waitForToasterSpace();
+
         const notification = notifications.dequeue();
         if (notification === null) {
             break;
@@ -144,13 +146,16 @@ async function processNotifications() {
         content.innerText = notification.content;
 
         toaster.appendChild(toastFragment);
-        await waitForToasterSpace();
     }
 
     isProcessing = false;
 }
 
 function waitForToasterSpace() {
+    if (toaster.children.length < 1) {
+        return Promise.resolve();
+    }
+
     return new Promise((resolve) => {
             const toasterObserver = new MutationObserver((mutations, observer) => {
                 for (const mutation of mutations) {
