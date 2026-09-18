@@ -145,7 +145,29 @@ async function processNotifications() {
         content.innerText = notification.content;
 
         toaster.appendChild(toastFragment);
+        await waitForToasterSpace();
     }
 
     isProcessing = false;
+}
+
+function waitForToasterSpace() {
+    return new Promise((resolve) => {
+            const toasterObserver = new MutationObserver((mutations, observer) => {
+                for (const mutation of mutations) {
+                    const mutatedNode = mutation.target;
+                    if (mutatedNode.nodeType === Node.ELEMENT_NODE && mutatedNode.children.length < 1) {
+                        observer.disconnect();
+                        resolve();
+                    }
+                }
+            });
+
+            toasterObserver.observe(toaster, { 
+                childList: true,
+                subtree: false,
+                characterData: false,
+                attributes: false
+            });
+        });
 }
