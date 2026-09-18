@@ -52,7 +52,7 @@ notifyForm.addEventListener("submit", async (event) => {
         title: notificationTitle?.value ?? "",
         content: notificationContent?.value ?? "" 
     };
-    
+
     await pushNotification(notification);
 });
 
@@ -110,7 +110,7 @@ async function processNotifications() {
     isProcessing = true;
 
     while (!notifications.isEmpty) {
-        await waitForToasterSpace();
+        await waitForFreeToasterSpace();
 
         const notification = notifications.dequeue();
         if (notification === null) {
@@ -152,7 +152,7 @@ async function processNotifications() {
     isProcessing = false;
 }
 
-function waitForToasterSpace() {
+function waitForFreeToasterSpace() {
     if (toaster.children.length < 1) {
         return Promise.resolve();
     }
