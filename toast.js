@@ -147,7 +147,7 @@ async function processNotifications() {
 }
 
 function waitForFreeToasterSpace() {
-    if (toaster.children.length < 1) {
+    if (isToasterFree(toaster)) {
         return Promise.resolve();
     }
 
@@ -155,7 +155,7 @@ function waitForFreeToasterSpace() {
         const toasterObserver = new MutationObserver((mutations, observer) => {
             for (const mutation of mutations) {
                 const mutatedNode = mutation.target;
-                if (mutatedNode.nodeType === Node.ELEMENT_NODE && mutatedNode.children.length < 1) {
+                if (mutatedNode.nodeType === Node.ELEMENT_NODE && isToasterFree(mutatedNode)) {
                     observer.disconnect();
                     resolve();
                 }
@@ -169,4 +169,8 @@ function waitForFreeToasterSpace() {
             attributes: false
         });
     });
+}
+
+function isToasterFree(toaster) {
+    return toaster.children.length < 1;
 }
