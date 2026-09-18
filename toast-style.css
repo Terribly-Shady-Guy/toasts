@@ -52,7 +52,7 @@
     }
 }
 
-.dismiss-button {
+.dismiss-button, .dismiss-button:disabled {
     border: none;
     background-color: transparent;
     position: absolute;
@@ -60,10 +60,10 @@
     top: 5px;
     color: gray;
     transition: color .125s ease;
+}
 
-    &:hover {
-        color: lightgray;
-    }
+.dismiss-button:hover {
+    color: lightgray;
 }
 
 .toast-dismiss-container {

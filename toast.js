@@ -62,6 +62,17 @@ toaster.addEventListener("animationend", event => {
     }
 });
 
+toaster.addEventListener("animationstart", event => {
+    if (event.animationName === "slideOut") {
+        const dismissButton = event.target.querySelector(".dismiss-button");
+        if (dismissButton === null) {
+           return;
+        }
+
+        dismissButton.disabled = true;
+    }
+});
+
 toaster.addEventListener("click", event => {
     const eventTargetElement = event.target;
     if (!eventTargetElement.classList.contains("dismiss-button")) {
