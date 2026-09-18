@@ -51,7 +51,8 @@ notifyForm.addEventListener("submit", async (event) => {
         type: notificationType?.value ?? "info",
         title: notificationTitle?.value ?? "",
         content: notificationContent?.value ?? "" 
-    }
+    };
+    
     await pushNotification(notification);
 });
 
