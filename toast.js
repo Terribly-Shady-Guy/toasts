@@ -41,18 +41,17 @@ const toaster = document.querySelector(".toaster");
 notifyForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const notification = {
-        type: "info",
-        title: "",
-        content: ""
-    };
-
     const submittedForm = event.currentTarget;
 
-    notification.type = submittedForm.elements.namedItem("toastType").value;
-    notification.title = submittedForm.elements.namedItem("title").value;
-    notification.content = submittedForm.elements.namedItem("content").value;
+    const notificationType = submittedForm.elements.namedItem("toastType");
+    const notificationTitle = submittedForm.elements.namedItem("title");
+    const notificationContent = submittedForm.elements.namedItem("content");
 
+    const notification = {
+        type: notificationType?.value ?? "info",
+        title: notificationTitle?.value ?? "",
+        content: notificationContent?.value ?? "" 
+    }
     await pushNotification(notification);
 });
 
