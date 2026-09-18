@@ -127,17 +127,11 @@ async function processNotifications() {
 
             const image = toastFragment.querySelector(".toast-image");
 
-            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            svg.setAttribute("viewBox", "0 0 25 25");
-
-            const svgUse = document.createElementNS("http://www.w3.org/2000/svg", "use");
-
-            svgUse.setAttribute("href", `./${toastStyle.badge}`);
-            svgUse.setAttribute("width", 25);
-            svgUse.setAttribute("height", 25);
-
-            svg.appendChild(svgUse);
-            image.appendChild(svg);
+            const response = await fetch(`http://localhost:8080/${toastStyle.badge}`);
+            if (response.ok) {
+                const svg = await response.text();
+                image.innerHTML = svg;
+            }
         } 
 
         const title = toastFragment.querySelector(".toast-text-title");
