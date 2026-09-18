@@ -20,7 +20,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.205);
     box-sizing: border-box;
     animation: .333s forwards 0s slideIn,
-    .333s forwards 5s slideOut;
+    .6s forwards 5s slideOut;
 }
 
 .toast-info {
