@@ -157,22 +157,22 @@ function waitForFreeToasterSpace() {
         return Promise.resolve();
     }
 
-    return new Promise((resolve) => {
-            const toasterObserver = new MutationObserver((mutations, observer) => {
-                for (const mutation of mutations) {
-                    const mutatedNode = mutation.target;
-                    if (mutatedNode.nodeType === Node.ELEMENT_NODE && mutatedNode.children.length < 1) {
-                        observer.disconnect();
-                        resolve();
-                    }
+    return new Promise(resolve => {
+        const toasterObserver = new MutationObserver((mutations, observer) => {
+            for (const mutation of mutations) {
+                const mutatedNode = mutation.target;
+                if (mutatedNode.nodeType === Node.ELEMENT_NODE && mutatedNode.children.length < 1) {
+                    observer.disconnect();
+                    resolve();
                 }
-            });
-
-            toasterObserver.observe(toaster, { 
-                childList: true,
-                subtree: false,
-                characterData: false,
-                attributes: false
-            });
+            }
         });
+
+        toasterObserver.observe(toaster, { 
+            childList: true,
+            subtree: false,
+            characterData: false,
+            attributes: false
+        });
+    });
 }
