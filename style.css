@@ -1,0 +1,41 @@
+html {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#notify-form {
+    width: 30%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.205);
+    padding: 5px;
+}
+
+#notify-form > div, #type-radios {
+    box-sizing: border-box;
+}
+
+#type-radios, #form-buttons {
+    grid-column: span 2;
+}
+
+#form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#type-radios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form input[type="text"], form fieldset, form button {
+    border-radius: 5px;
+    border: 1px solid black;
+}

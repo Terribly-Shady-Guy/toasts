@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="toast-style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Toast Notifications</title>
 </head>
 <body>
@@ -15,22 +16,37 @@
         <section>
             <h2>Enter some content for a toast notification</h2>
             <form id="notify-form">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" maxlength="10" required>
-                <label for="toast-content">Content</label>
-                <input type="text" name="content" id="toast-content" maxlength="35" required>
-                <fieldset>
-                    <legend>Select a toast type.</legend>
-                    <input type="radio" name="toastType" id="info-radio" value="info" checked>
-                    <label for="info-radio">Info</label>
-                    <input type="radio" name="toastType" id="success-radio" value="success">
-                    <label for="success-radio">Success</label>
-                    <input type="radio" name="toastType" id="warning-radio" value="warning">
-                    <label for="warning-radio">Warning</label>
-                    <input type="radio" name="toastType" id="error-radio" value="error">
-                    <label for="error-radio">Error</label>
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" maxlength="10" required>
+                </div>
+                <div>
+                    <label for="toast-content">Content</label>
+                    <input type="text" name="content" id="toast-content" maxlength="35" required>
+                </div>
+                <fieldset id="type-radios">
+                    <legend>Toast type.</legend>
+                    <div>
+                        <input type="radio" name="toastType" id="info-radio" value="info" checked>
+                        <label for="info-radio">Info</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="toastType" id="success-radio" value="success">
+                        <label for="success-radio">Success</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="toastType" id="warning-radio" value="warning">
+                        <label for="warning-radio">Warning</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="toastType" id="error-radio" value="error">
+                        <label for="error-radio">Error</label>
+                    </div>
                 </fieldset>
-                <button type="submit">Notify</button>
+                <div id="form-buttons">
+                    <button type="submit">Notify</button>
+                    <button type="reset">Reset</button>
+                </div>
             </form>
         </section>
         <div class="toaster"></div>
