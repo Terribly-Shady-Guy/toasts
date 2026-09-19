@@ -56,14 +56,16 @@ notifyForm.addEventListener("submit", async (event) => {
     await pushNotification(notification);
 });
 
+const slideOutAnimationName = "slideOut";
+
 toaster.addEventListener("animationend", event => {
-    if (event.animationName === "slideOut") {
+    if (event.animationName === slideOutAnimationName) {
         event.target.remove();
     }
 });
 
 toaster.addEventListener("animationstart", event => {
-    if (event.animationName === "slideOut") {
+    if (event.animationName === slideOutAnimationName) {
         const dismissButton = event.target.querySelector(".dismiss-button");
         if (dismissButton === null) {
            return;
@@ -85,7 +87,7 @@ toaster.addEventListener("click", event => {
     }
 
     const toastSlideInAnimation = toast.getAnimations()
-        .find(animation => animation.animationName === "slideOut");
+        .find(animation => animation.animationName === slideOutAnimationName);
     
     if (toastSlideInAnimation === undefined) {
         return;
