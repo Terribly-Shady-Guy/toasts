@@ -163,7 +163,9 @@ function waitForFreeToasterSpace() {
         const toasterObserver = new MutationObserver((mutations, observer) => {
             for (const mutation of mutations) {
                 const mutatedNode = mutation.target;
-                if (mutatedNode.nodeType === Node.ELEMENT_NODE && isToasterFree(mutatedNode)) {
+                if (mutatedNode.nodeType === Node.ELEMENT_NODE
+                    && mutatedNode.classList.contains("toaster")
+                    && isToasterFree(mutatedNode)) {
                     observer.disconnect();
                     resolve();
                 }
