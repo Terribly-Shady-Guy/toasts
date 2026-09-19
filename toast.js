@@ -127,8 +127,6 @@ async function processNotifications() {
         if (toastStyle !== undefined) {
             toast.classList.add(toastStyle.class);
 
-            const image = toastFragment.querySelector(".toast-image");
-
             const response = await fetch(`http://localhost:8080/${toastStyle.badge}`, {
                 method: "GET",
                 headers: {
@@ -137,6 +135,8 @@ async function processNotifications() {
             });
 
             if (response.ok) {
+                const image = toastFragment.querySelector(".toast-image");
+                
                 const svg = await response.text();
                 image.innerHTML = svg;
             }
