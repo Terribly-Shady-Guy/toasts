@@ -67,15 +67,15 @@ toaster.addEventListener("click", event => {
         return;
     }
 
-    const toastSlideInAnimation = toast.getAnimations()
+    const toastSlideOutAnimation = toast.getAnimations()
         .find(animation => animation.animationName === slideOutAnimationName);
     
-    if (toastSlideInAnimation === undefined) {
+    if (toastSlideOutAnimation === undefined) {
         return;
     }
 
-    toastSlideInAnimation.effect.updateTiming({delay: 0});
-    toastSlideInAnimation.play();
+    toastSlideOutAnimation.effect.updateTiming({delay: 0});
+    toastSlideOutAnimation.play();
 });
 
 async function pushNotification(notification) {
