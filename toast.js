@@ -95,12 +95,12 @@ toaster.addEventListener("click", event => {
     toastSlideInAnimation.play();
 });
 
-let isProcessing = false;
-
 async function pushNotification(notification) {
     notifications.enqueue(notification);
     await processNotifications();
 }
+
+let isProcessing = false;
 
 async function processNotifications() {
     if (isProcessing) {
