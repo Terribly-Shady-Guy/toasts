@@ -129,7 +129,13 @@ async function processNotifications() {
 
             const image = toastFragment.querySelector(".toast-image");
 
-            const response = await fetch(`http://localhost:8080/${toastStyle.badge}`);
+            const response = await fetch(`http://localhost:8080/${toastStyle.badge}`, {
+                method: "GET",
+                headers: {
+                    accepts: "image/svg+xml"
+                }
+            });
+
             if (response.ok) {
                 const svg = await response.text();
                 image.innerHTML = svg;
