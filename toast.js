@@ -34,27 +34,8 @@ const toastNotificationStyles = new Map()
         badge: "exclamation-circle-fill.svg"
     });
 
-const notifyForm = document.querySelector("#notify-form");
 const toastTemplate = document.querySelector("#toast-template");
 const toaster = document.querySelector(".toaster");
-
-notifyForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const submittedForm = event.currentTarget;
-
-    const notificationType = submittedForm.elements.namedItem("toastType");
-    const notificationTitle = submittedForm.elements.namedItem("title");
-    const notificationContent = submittedForm.elements.namedItem("content");
-
-    const notification = {
-        type: notificationType?.value ?? "info",
-        title: notificationTitle?.value ?? "",
-        content: notificationContent?.value ?? "" 
-    };
-
-    await pushNotification(notification);
-});
 
 const slideOutAnimationName = "slideOut";
 
