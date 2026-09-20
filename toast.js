@@ -103,9 +103,9 @@ async function processNotifications() {
         const toastStyle = toastNotificationStyles.get(notification.type);
 
         const toastFragment = toastTemplate.content.cloneNode(true);
-        const toast = toastFragment.querySelector(".toast");
 
         if (toastStyle !== undefined) {
+            const toast = toastFragment.querySelector(".toast");
             toast.classList.add(toastStyle.class);
 
             const response = await fetch(`http://localhost:8080/${toastStyle.badge}`, {
