@@ -108,7 +108,7 @@ async function processNotifications() {
             const toast = toastFragment.querySelector(".toast");
             toast.classList.add(toastStyle.class);
 
-            const response = await fetch(`http://localhost:8080/${toastStyle.badge}`, {
+            const response = await fetch(`/${toastStyle.badge}`, {
                 method: "GET",
                 headers: {
                     accepts: "image/svg+xml"
