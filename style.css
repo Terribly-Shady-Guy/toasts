@@ -7,7 +7,6 @@ html {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 5px;
-    border: 1px black solid;
     padding: 5px;
 }
 
@@ -23,6 +22,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
 }
 
 #type-radios {
@@ -33,9 +33,48 @@ html {
 input[type="text"] {
     width: 100%;
     box-sizing: border-box;
+    padding: 3px;
 }
 
-form input[type="text"], form fieldset, form button {
+#notify-form input[type="text"], #notify-form fieldset, #notify-form button {
     border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+#notify-form input[type="text"]:focus {
+    outline: 2px solid rgb(124, 213, 199);
+}
+
+#notify-form input[type="radio"] {
+    appearance: none;
     border: 1px solid black;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    
+    &::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: rgb(124, 213, 199);
+        visibility: hidden;
+    }
+
+    &:checked::before {
+        visibility: visible;
+    }
+
+    &:checked {
+        border-color: rgb(17, 138, 178);
+    }
+}
+
+#form-buttons button {
+    background-color: rgb(124, 213, 199);
+    border-color: rgb(124, 213, 199);
+    padding: 5px 15px 5px 15px;
 }
