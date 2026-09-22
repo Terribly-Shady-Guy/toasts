@@ -30,19 +30,19 @@ html {
     grid-template-columns: repeat(2, 1fr);
 }
 
-input[type="text"] {
+#notify-form input[type="text"] {
     width: 100%;
     box-sizing: border-box;
     padding: 3px;
+
+    &:focus {
+         outline: 2px solid rgb(124, 213, 199);
+    }
 }
 
 #notify-form input[type="text"], #notify-form fieldset, #notify-form button {
     border-radius: 5px;
     border: 1px solid lightgray;
-}
-
-#notify-form input[type="text"]:focus {
-    outline: 2px solid rgb(124, 213, 199);
 }
 
 #notify-form input[type="radio"] {
