@@ -149,6 +149,8 @@ function waitForFreeToasterSpace() {
                     && isToasterFree(mutatedNode)) {
                     observer.disconnect();
                     resolve();
+
+                    break;
                 }
             }
         });
