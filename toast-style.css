@@ -1,5 +1,5 @@
 .toaster {
-    --toast-accent-color: black;
+    --toast-accent-color: rgb(124, 213, 199);
 
     position: fixed;
     bottom: 10px;
