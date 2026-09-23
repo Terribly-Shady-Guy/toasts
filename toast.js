@@ -80,12 +80,12 @@ toaster.addEventListener("click", event => {
 
 async function pushNotification(notification) {
     notifications.enqueue(notification);
-    await processNotifications();
+    await renderNotifications();
 }
 
 let isProcessing = false;
 
-async function processNotifications() {
+async function renderNotifications() {
     if (isProcessing) {
         return;
     }
