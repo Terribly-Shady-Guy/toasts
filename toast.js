@@ -92,7 +92,7 @@ async function processNotifications() {
 
     isProcessing = true;
 
-     while (!notifications.isEmpty) {
+    while (!notifications.isEmpty) {
         await waitForFreeToasterSpace();
 
         const notification = notifications.dequeue();
