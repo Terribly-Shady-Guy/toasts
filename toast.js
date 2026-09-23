@@ -100,10 +100,9 @@ async function processNotifications() {
             break;
         }
         
-        const toastStyle = toastNotificationStyles.get(notification.type);
-
         const toastFragment = toastTemplate.content.cloneNode(true);
 
+        const toastStyle = toastNotificationStyles.get(notification.type);
         if (toastStyle !== undefined) {
             const toast = toastFragment.querySelector(".toast");
             toast.classList.add(toastStyle.class);
@@ -120,6 +119,8 @@ async function processNotifications() {
                 
                 const svg = await response.text();
                 image.innerHTML = svg;
+            } else {
+                console.error("Failed to get toast badge.");
             }
         } 
 
