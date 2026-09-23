@@ -8,6 +8,8 @@ html {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 5px;
     padding: 5px;
+
+    --form-accent-color: rgb(124, 213, 199);
 }
 
 #notify-form > div, #type-radios {
@@ -36,7 +38,7 @@ html {
     padding: 3px;
 
     &:focus {
-         outline: 2px solid rgb(124, 213, 199);
+         outline: 2px solid var(--form-accent-color);
     }
 }
 
@@ -60,7 +62,7 @@ html {
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background-color: rgb(124, 213, 199);
+        background-color: var(--form-accent-color);
         visibility: hidden;
     }
 
@@ -74,7 +76,7 @@ html {
 }
 
 #form-buttons button {
-    background-color: rgb(124, 213, 199);
-    border-color: rgb(124, 213, 199);
+    background-color: var(--form-accent-color);
+    border-color: var(--form-accent-color);
     padding: 5px 15px 5px 15px;
 }

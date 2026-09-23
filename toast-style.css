@@ -1,8 +1,6 @@
-:root {
-    --toast-accent-color: black;
-}
-
 .toaster {
+    --toast-accent-color: black;
+    
     position: fixed;
     bottom: 10px;
     right: 10px;
