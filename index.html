@@ -13,8 +13,8 @@
         <h1>Some web application</h1>
     </header>
     <main>
-        <section>
-            <h2>Enter some content for a toast notification</h2>
+        <section id="form-section" class="content-center">
+            <h2>Enter some content to display a toast notification.</h2>
             <form id="notify-form">
                 <div>
                     <label for="title">Title</label>
@@ -43,7 +43,7 @@
                         <label for="error-radio">Error</label>
                     </div>
                 </fieldset>
-                <div id="form-buttons">
+                <div id="form-buttons" class="content-center">
                     <button type="submit">Notify</button>
                     <button type="reset">Reset</button>
                 </div>
@@ -53,7 +53,7 @@
     </main>
     <template id="toast-template">
         <div class="toast" role="status">
-                <div class="toast-image toast-column"></div>
+                <div class="toast-image toast-column content-center"></div>
                 <div class="toast-text toast-column">
                     <h3 class="toast-text-title"></h3>
                     <p class="toast-text-content"></p>

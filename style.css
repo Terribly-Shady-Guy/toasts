@@ -2,6 +2,20 @@ html {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+h1, h2 {
+    text-align: center;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-section {
+    flex-direction: column;
+}
+
 #notify-form {
     width: 30%;
     display: grid;
@@ -21,9 +35,6 @@ html {
 }
 
 #form-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 5px;
 }
 
