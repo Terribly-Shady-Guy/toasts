@@ -107,25 +107,7 @@ async function processNotifications() {
             const toast = toastFragment.querySelector(".toast");
             toast.classList.add(toastStyle.class);
 
-            try {
-                const response = await fetch(`/${toastStyle.badge}`, {
-                    method: "GET",
-                    headers: {
-                        accepts: "image/svg+xml"
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server responded with status code ${response.status}`);
-                }
-
-                const image = toastFragment.querySelector(".toast-image");
-                    
-                const svg = await response.text();
-                image.innerHTML = svg;
-            } catch (error) {
-                console.error("Failed to get toast badge.", error);
-            }
+            await setToastBadge(toastFragment, toastStyle.badge);
         }
 
         const title = toastFragment.querySelector(".toast-text-title");
@@ -171,4 +153,26 @@ function waitForFreeToasterSpace() {
 
 function isToasterFree(toaster) {
     return toaster.children.length < 1;
+}
+
+async function setToastBadge(toastFragment, badge) {
+    try {
+        const response = await fetch(`/${badge}`, {
+            method: "GET",
+            headers: {
+                accepts: "image/svg+xml"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server responded with status code ${response.status}`);
+        }
+
+        const image = toastFragment.querySelector(".toast-image");
+            
+        const svg = await response.text();
+        image.innerHTML = svg;
+    } catch (error) {
+        console.error("Failed to get toast badge.", error);
+    }
 }
