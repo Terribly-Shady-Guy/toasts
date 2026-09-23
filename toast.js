@@ -92,48 +92,51 @@ async function processNotifications() {
 
     isProcessing = true;
 
-    while (!notifications.isEmpty) {
-        await waitForFreeToasterSpace();
+    try {
+        while (!notifications.isEmpty) {
+            await waitForFreeToasterSpace();
 
-        const notification = notifications.dequeue();
-        if (notification === null) {
-            break;
-        }
-        
-        const toastFragment = toastTemplate.content.cloneNode(true);
-
-        const toastStyle = toastNotificationStyles.get(notification.type);
-        if (toastStyle !== undefined) {
-            const toast = toastFragment.querySelector(".toast");
-            toast.classList.add(toastStyle.class);
-
-            const response = await fetch(`/${toastStyle.badge}`, {
-                method: "GET",
-                headers: {
-                    accepts: "image/svg+xml"
-                }
-            });
-
-            if (response.ok) {
-                const image = toastFragment.querySelector(".toast-image");
-                
-                const svg = await response.text();
-                image.innerHTML = svg;
-            } else {
-                console.error("Failed to get toast badge.");
+            const notification = notifications.dequeue();
+            if (notification === null) {
+                break;
             }
-        } 
+            
+            const toastFragment = toastTemplate.content.cloneNode(true);
 
-        const title = toastFragment.querySelector(".toast-text-title");
-        title.innerText = notification.title;
+            const toastStyle = toastNotificationStyles.get(notification.type);
+            if (toastStyle !== undefined) {
+                const toast = toastFragment.querySelector(".toast");
+                toast.classList.add(toastStyle.class);
 
-        const content = toastFragment.querySelector(".toast-text-content");
-        content.innerText = notification.content;
+                const response = await fetch(`/${toastStyle.badge}`, {
+                    method: "GET",
+                    headers: {
+                        accepts: "image/svg+xml"
+                    }
+                });
 
-        toaster.appendChild(toastFragment);
+                if (response.ok) {
+                    const image = toastFragment.querySelector(".toast-image");
+                    
+                    const svg = await response.text();
+                    image.innerHTML = svg;
+                } else {
+                    console.error("Failed to get toast badge.");
+                }
+            } 
+
+            const title = toastFragment.querySelector(".toast-text-title");
+            title.innerText = notification.title;
+
+            const content = toastFragment.querySelector(".toast-text-content");
+            content.innerText = notification.content;
+
+            toaster.appendChild(toastFragment);
+        }
+
+    } finally {
+        isProcessing = false;
     }
-
-    isProcessing = false;
 }
 
 function waitForFreeToasterSpace() {
