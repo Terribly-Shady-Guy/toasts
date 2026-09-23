@@ -165,7 +165,7 @@ async function setToastBadge(toastFragment, badge) {
         });
 
         if (!response.ok) {
-            throw new Error(`Server responded with status code ${response.status}`);
+            throw new Error(`Server responded with status code ${response.status}.`);
         }
 
         const image = toastFragment.querySelector(".toast-image");
