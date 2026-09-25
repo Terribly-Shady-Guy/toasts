@@ -26,10 +26,6 @@ h1, h2 {
     --form-accent-color: rgb(124, 213, 199);
 }
 
-#notify-form > div, #type-radios {
-    box-sizing: border-box;
-}
-
 #type-radios, #form-buttons {
     grid-column: span 2;
 }
