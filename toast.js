@@ -37,16 +37,17 @@ const toastNotificationStyles = new Map()
 const toastTemplate = document.querySelector("#toast-template");
 const toaster = document.querySelector(".toaster");
 
-const slideOutAnimationName = "slideOut";
+const toastExitAnimationName = matchMedia("(prefers-reduced-motion: reduce)")
+    .matches ? "fadeOut" : "slideOut";
 
 toaster.addEventListener("animationend", event => {
-    if (event.animationName === slideOutAnimationName) {
+    if (event.animationName === toastExitAnimationName) {
         event.target.remove();
     }
 });
 
 toaster.addEventListener("animationstart", event => {
-    if (event.animationName === slideOutAnimationName) {
+    if (event.animationName === toastExitAnimationName) {
         const dismissButton = event.target.querySelector(".dismiss-button");
         if (dismissButton === null) {
            return;
@@ -67,15 +68,15 @@ toaster.addEventListener("click", event => {
         return;
     }
 
-    const toastSlideOutAnimation = toast.getAnimations()
-        .find(animation => animation.animationName === slideOutAnimationName);
+    const toastExitAnimation = toast.getAnimations()
+        .find(animation => animation.animationName === toastExitAnimationName);
     
-    if (toastSlideOutAnimation === undefined) {
+    if (toastExitAnimation === undefined) {
         return;
     }
 
-    toastSlideOutAnimation.effect.updateTiming({delay: 0});
-    toastSlideOutAnimation.play();
+    toastExitAnimation.effect.updateTiming({delay: 0});
+    toastExitAnimation.play();
 });
 
 async function pushNotification(notification) {
@@ -160,7 +161,7 @@ async function setToastBadge(toastFragment, badge) {
         const response = await fetch(`/${badge}`, {
             method: "GET",
             headers: {
-                accepts: "image/svg+xml"
+                Accept: "image/svg+xml"
             }
         });
 

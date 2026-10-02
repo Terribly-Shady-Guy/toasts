@@ -21,6 +21,13 @@
     .6s forwards 5s slideOut;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        animation: .125s forwards 0s fadeIn,
+        .125s forwards 5s fadeOut !important;
+    }
+}
+
 .toast-info {
     --toast-accent-color: royalblue;
 }
@@ -98,5 +105,25 @@
 
     to {
         translate: 101vw;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
     }
 }
