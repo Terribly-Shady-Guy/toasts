@@ -10,7 +10,7 @@ class NotificationQueue {
     }
 
     dequeue() {
-        return this.isEmpty ? null : this.#queue.shift();
+        return this.#queue.shift();
     }
 }
 
@@ -96,7 +96,7 @@ async function renderNotifications() {
         await waitForFreeToasterSpace();
 
         const notification = notifications.dequeue();
-        if (notification === null) {
+        if (notification === undefined) {
             break;
         }
         
