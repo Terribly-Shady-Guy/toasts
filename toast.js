@@ -19,19 +19,19 @@ const notifications = new NotificationQueue();
 const toastNotificationStyles = new Map()
     .set("info", {
         class: "toast-info",
-        badge: "info-circle-fill.svg"
+        badgeTemplate: document.querySelector("#info-circle-svg")
     })
     .set("success", {
         class: "toast-success",
-        badge: "check-circle-fill.svg"
+        badgeTemplate: document.querySelector("#check-circle-svg")
     })
     .set("warning", {
         class: "toast-warning",
-        badge: "exclamation-triangle-fill.svg"
+        badgeTemplate: document.querySelector("#exclamation-triangle-svg")
     })
     .set("error", {
         class: "toast-error",
-        badge: "exclamation-circle-fill.svg"
+        badgeTemplate: document.querySelector("#exclamation-circle-svg")
     });
 
 const toastTemplate = document.querySelector("#toast-template");
@@ -108,7 +108,9 @@ async function renderNotifications() {
             const toast = toastFragment.querySelector(".toast");
             toast.classList.add(toastStyle.class);
 
-            await setToastBadge(toastFragment, toastStyle.badge);
+            const svg = toastStyle.badgeTemplate.content.cloneNode(true);
+            const imgContainer = toastFragment.querySelector(".toast-image");
+            imgContainer.appendChild(svg);
         }
 
         const title = toastFragment.querySelector(".toast-text-title");
@@ -154,26 +156,4 @@ function waitForFreeToasterSpace() {
 
 function isToasterFree(toaster) {
     return toaster.children.length < 1;
-}
-
-async function setToastBadge(toastFragment, badge) {
-    try {
-        const response = await fetch(`/${badge}`, {
-            method: "GET",
-            headers: {
-                Accept: "image/svg+xml"
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Server responded with status code ${response.status}.`);
-        }
-
-        const image = toastFragment.querySelector(".toast-image");
-            
-        const svg = await response.text();
-        image.innerHTML = svg;
-    } catch (error) {
-        console.error("Failed to get toast badge.", error);
-    }
 }
