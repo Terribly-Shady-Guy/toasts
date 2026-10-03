@@ -40,6 +40,7 @@ const toaster = document.querySelector(".toaster");
 const toastExitAnimationName = matchMedia("(prefers-reduced-motion: reduce)")
     .matches ? "fadeOut" : "slideOut";
 
+// Event delegation used to avoid binding event listeners for each individual toast, and cleaning them up after removal.
 toaster.addEventListener("animationend", event => {
     if (event.animationName === toastExitAnimationName) {
         event.target.remove();
