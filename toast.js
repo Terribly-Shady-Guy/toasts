@@ -1,14 +1,35 @@
+/**
+ * @file Manages toast notifications used in the page.
+ * @typedef {{
+ *  type: string, 
+ *  title: string, 
+ *  content: string
+ * }} ToastNotification
+ */
+
+/**
+ * A queue for managing notifications.
+ */
 class NotificationQueue {
+    /** @type {ToastNotification[]} */
     #queue = [];
 
     get isEmpty() {
         return this.#queue.length === 0;
     }
 
+    /**
+     * Adds a notification to the queue.
+     * @param {ToastNotification} notification 
+     */
     enqueue(notification) {
         this.#queue.push(notification);
     }
 
+    /**
+     * Retrieves and removes the next notification object from the queue.
+     * @returns {ToastNotification|undefined} ToastNotification if items in queue, or undefined if empty.
+     */
     dequeue() {
         return this.#queue.shift();
     }
@@ -16,6 +37,7 @@ class NotificationQueue {
 
 const notifications = new NotificationQueue();
 
+/**@type {Map<string, {class: string, badgeTemplate: HTMLTemplateElement|null}>} */
 const toastNotificationStyles = new Map()
     .set("info", {
         class: "toast-info",
@@ -34,7 +56,15 @@ const toastNotificationStyles = new Map()
         badgeTemplate: document.querySelector("#exclamation-circle-svg")
     });
 
+/**
+ * The template element providing the structure used for an individual toast popup. 
+ * @type {HTMLTemplateElement|null}
+ * */
 const toastTemplate = document.querySelector("#toast-template");
+/** 
+ * The container used for displaying toasts.
+ * @type {HTMLDivElement|null} 
+ */
 const toaster = document.querySelector(".toaster");
 
 const toastExitAnimationName = matchMedia("(prefers-reduced-motion: reduce)")
@@ -63,6 +93,7 @@ toaster.addEventListener("click", event => {
         return;
     }
 
+    /**@type {HTMLDivElement|null} */
     const toast = event.target.closest(".toaster > .toast");
     if (toast === null) {
         return;
@@ -79,6 +110,10 @@ toaster.addEventListener("click", event => {
     toastExitAnimation.play();
 });
 
+/**
+ * Queues a new notification to be displayed.
+ * @param {ToastNotification} notification 
+ */
 async function pushNotification(notification) {
     notifications.enqueue(notification);
     await renderNotifications();
