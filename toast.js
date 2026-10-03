@@ -58,12 +58,11 @@ toaster.addEventListener("animationstart", event => {
 });
 
 toaster.addEventListener("click", event => {
-    const eventTargetElement = event.target;
-    if (!eventTargetElement.classList.contains("dismiss-button")) {
+    if (!event.target.classList.contains("dismiss-button")) {
         return;
     }
 
-    const toast = eventTargetElement.closest(".toaster > .toast");
+    const toast = event.target.closest(".toaster > .toast");
     if (toast === null) {
         return;
     }
