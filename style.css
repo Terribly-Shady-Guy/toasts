@@ -70,11 +70,12 @@ h1, h2 {
         height: 6px;
         border-radius: 50%;
         background-color: var(--form-accent-color);
-        visibility: hidden;
+        scale: 0%;
+        transition: scale .25s;
     }
 
     &:checked::before {
-        visibility: visible;
+        scale: 100%;
     }
 
     &:checked {
