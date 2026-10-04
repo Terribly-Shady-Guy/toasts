@@ -121,6 +121,10 @@ async function pushNotification(notification) {
 
 let isProcessing = false;
 
+/**
+ * Renders the notifications stored in the queue in the toaster element.
+ * @returns {Promise<any>}
+ */
 async function renderNotifications() {
     if (isProcessing) {
         return;
@@ -160,6 +164,10 @@ async function renderNotifications() {
     isProcessing = false;
 }
 
+/**
+ * Asynchronously pauses execution until toaster has free space.
+ * @returns {Promise<any>} A promise that resolves when space is available in toaster element.
+ */
 function waitForFreeToasterSpace() {
     if (isToasterFree(toaster)) {
         return Promise.resolve();
@@ -189,6 +197,11 @@ function waitForFreeToasterSpace() {
     });
 }
 
+/**
+ * Tests if provided toaster element has available space for a new toast notification.
+ * @param {HTMLDivElement} toaster 
+ * @returns {boolean} A boolean flag inducating whether there is available space in toaster element.
+ */
 function isToasterFree(toaster) {
     return toaster.children.length < 1;
 }
