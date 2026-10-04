@@ -55,10 +55,11 @@ h1, h2 {
 }
 
 #notify-form input[type="radio"] {
+    --radio-size: 12px;
     appearance: none;
     border: 1px solid black;
-    width: 12px;
-    height: 12px;
+    width: var(--radio-size);
+    height: var(--radio-size);
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -66,8 +67,8 @@ h1, h2 {
     
     &::before {
         content: "";
-        width: 6px;
-        height: 6px;
+        width: calc(var(--radio-size) / 2);
+        height: calc(var(--radio-size) / 2);
         border-radius: 50%;
         background-color: var(--form-accent-color);
         scale: 0%;
